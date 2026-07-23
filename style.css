@@ -622,6 +622,37 @@ img {
     filter: brightness(0.85) contrast(1.18);
 }
 
+/* SMART FRAME FOR UNREADABLE ASPECT RATIO PHOTOS */
+.gallery-item.horizontal-card.smart-frame-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item.horizontal-card .blurred-bg {
+    position: absolute;
+    inset: -25px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px) brightness(0.35) contrast(1.1);
+    transform: scale(1.25);
+    z-index: 1;
+}
+
+.gallery-item.horizontal-card img.smart-contain-img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent;
+    filter: brightness(0.95) contrast(1.12);
+    transition: var(--transition);
+}
+
+.gallery-item.horizontal-card.smart-frame-card .gallery-overlay {
+    z-index: 3;
+}
+
 /* SLIDER NAVIGATION ARROWS */
 .slider-arrow {
     width: 60px;
