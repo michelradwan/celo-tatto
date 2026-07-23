@@ -518,6 +518,31 @@ img {
     align-items: center;
 }
 
+.artist-image-col .image-frame {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-gold);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
+    height: 540px;
+    background-color: #080808;
+}
+
+.artist-image-col .image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 12% !important; /* DIRECT FOCUS ON FACE & EYES */
+    filter: brightness(1.06) contrast(1.08) !important; /* VIVID CLARITY FOR FACE */
+    transform: scale(1.05);
+    transform-origin: 50% 15%;
+    transition: transform 0.5s ease-out;
+}
+
+.artist-image-col .image-frame:hover img {
+    transform: scale(1.09);
+}
+
 .artist-tag {
     font-size: 0.75rem;
     font-weight: 700;
