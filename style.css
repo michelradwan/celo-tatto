@@ -642,9 +642,22 @@ img {
     height: 110px;
     border-radius: 50%;
     border: 2px dashed var(--gold-primary);
-    padding: 5px;
+    padding: 3px;
+    background: #080808;
     z-index: 20;
     animation: rotateSlow 30s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+}
+
+.badge-seal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
 }
 
 @keyframes rotateSlow {
