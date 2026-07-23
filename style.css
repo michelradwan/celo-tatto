@@ -1909,13 +1909,41 @@ select.form-input option {
     .accordion-content,
     .booking-header,
     .booking-text,
+    .site-footer,
+    .footer-layout,
     .footer-brand-col,
     .footer-contacts-col,
+    .footer-address-col,
     .footer-links-col,
+    .footer-heading,
     .footer-tagline,
+    .contact-list,
+    .contact-list li,
+    .address-text,
+    .hours-text,
+    .footer-bottom,
     .social-block,
     .social-label {
         text-align: center !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .footer-logo {
+        justify-content: center !important;
+        margin: 0 auto 1rem auto !important;
+    }
+
+    .contact-list li {
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+
+    .address-text, .hours-text {
+        justify-content: center !important;
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .section-title-wrapper {
