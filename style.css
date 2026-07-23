@@ -1344,25 +1344,10 @@ img {
    ========================================================================== */
 .booking-section {
     position: relative;
-    padding: 8rem 0;
+    padding: 7rem 0;
+    background-color: var(--bg-dark);
+    border-top: 1px solid var(--border-gold);
     overflow: hidden;
-}
-
-.booking-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.5) contrast(1.2);
-    z-index: 1;
-}
-
-.booking-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(8, 8, 8, 0.88);
-    backdrop-filter: blur(4px);
-    z-index: 2;
 }
 
 .booking-section .container {
