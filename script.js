@@ -308,6 +308,38 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBookingView(); // Ensure Option 1 is pre-selected and rendered by default
     }
 
+    const googleMapIframe = document.getElementById('googleMapIframe');
+    const userNumber = document.getElementById('userNumber');
+    let mapUpdateTimer = null;
+
+    // Live Map Update Function (Pinpoint exact address dynamically on Option 2)
+    function updateLiveMap() {
+        if (!googleMapIframe) return;
+        const cep = userCep ? userCep.value.trim() : '';
+        const address = userAddress ? userAddress.value.trim() : '';
+        const number = userNumber ? userNumber.value.trim() : '';
+
+        if (whatsappLocationCheck && whatsappLocationCheck.checked) {
+            googleMapIframe.src = `https://maps.google.com/maps?q=Acarau,Amontada,Ceara&t=&z=11&ie=UTF8&iwloc=&output=embed`;
+            return;
+        }
+
+        let searchQuery = [address, number, cep, 'Ceará, Brasil'].filter(Boolean).join(', ');
+        if (!address && !cep) {
+            searchQuery = 'Acaraú, Amontada, Ceará';
+        }
+
+        googleMapIframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(searchQuery)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+    }
+
+    function scheduleMapUpdate() {
+        clearTimeout(mapUpdateTimer);
+        mapUpdateTimer = setTimeout(updateLiveMap, 500); // 500ms debounce
+    }
+
+    if (userAddress) userAddress.addEventListener('input', scheduleMapUpdate);
+    if (userNumber) userNumber.addEventListener('input', scheduleMapUpdate);
+
     // ViaCEP API Brazil Auto Lookup
     if (userCep) {
         userCep.addEventListener('input', (e) => {
@@ -316,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 val = val.substring(0, 5) + '-' + val.substring(5, 8);
             }
             e.target.value = val;
+            scheduleMapUpdate();
         });
 
         userCep.addEventListener('blur', () => {
@@ -326,6 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         if (!data.erro && userAddress) {
                             userAddress.value = `${data.logradouro ? data.logradouro + ', ' : ''}${data.bairro ? data.bairro + ' - ' : ''}${data.localidade}/${data.uf}`;
+                            updateLiveMap();
                         }
                     })
                     .catch(() => {});
@@ -337,10 +371,12 @@ document.addEventListener('DOMContentLoaded', () => {
         whatsappLocationCheck.addEventListener('change', () => {
             if (whatsappLocationCheck.checked) {
                 if (userAddress) userAddress.value = 'Combinar endereço exato pelo WhatsApp';
+                if (userNumber) userNumber.value = '';
                 if (userCep) userCep.value = '';
             } else {
                 if (userAddress) userAddress.value = '';
             }
+            updateLiveMap();
         });
     }
 
@@ -352,8 +388,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOption2 = bookingType && bookingType.value === 'option2';
             const typeText = isOption2 ? '2ª Opção: Tattoo Flash para Eventos / No Seu Local' : '1ª Opção: Agendar Horário para Tatuar (Estúdio)';
             const locationSelect = document.getElementById('userLocation');
-            const location = isOption2 ? 'Evento / No Local do Cliente' : (locationSelect ? locationSelect.value : 'Estúdio Acaraú / Amontada');
+            const studioLocation = locationSelect ? locationSelect.value : 'Acaraú - CE (Estúdio Próprio)';
+            
+            const cep = userCep ? userCep.value.trim() : '';
             const address = userAddress ? userAddress.value.trim() : '';
+            const number = userNumber ? userNumber.value.trim() : '';
             const idea = document.getElementById('tattooIdea').value.trim();
             const dateVal = document.getElementById('preferredDate').value;
 
@@ -365,37 +404,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            let finalAddress = 'Não aplicável (Atendimento no Estúdio)';
-            if (isOption2) {
-                if (whatsappLocationCheck && whatsappLocationCheck.checked) {
-                    finalAddress = 'Combinar endereço exato pelo WhatsApp';
-                } else if (address) {
-                    finalAddress = address;
-                } else {
-                    finalAddress = 'Combinar local exato pelo WhatsApp';
-                }
+            let fullEventAddress = [address, number, cep ? `(CEP: ${cep})` : ''].filter(Boolean).join(' - ');
+            if (whatsappLocationCheck && whatsappLocationCheck.checked) {
+                fullEventAddress = 'Combinar local exato pelo WhatsApp';
+            } else if (!fullEventAddress) {
+                fullEventAddress = 'Combinar local exato pelo WhatsApp';
             }
 
-            const messageText = 
+            let messageText = '';
+            if (isOption2) {
+                messageText = 
+`🔥 *SOLICITAÇÃO DE EVENTO / TATTOO FLASH — CELO TATTOO* 🔥
+
+👤 *Nome do Responsável:* ${name}
+📌 *Modalidade:* 2ª Opção: Tattoo Flash para Eventos / No Seu Local
+🏡 *Endereço do Evento:* ${fullEventAddress}
+💡 *Detalhes do Evento / Tattoo:* ${idea}
+📅 *Data Preferida:* ${formattedDate}`;
+            } else {
+                messageText = 
 `🔥 *SOLICITAÇÃO DE AGENDAMENTO — CELO TATTOO* 🔥
 
 👤 *Nome:* ${name}
-📌 *Modalidade:* ${typeText}
-📍 *Local/Cidade:* ${location}
-${isOption2 ? `🏡 *Endereço do Evento:* ${finalAddress}\n` : ''}💡 *Projeto / Ideia:* ${idea}
+📌 *Modalidade:* 1ª Opção: Agendar Horário para Tatuar (Estúdio)
+📍 *Cidade / Estúdio:* ${studioLocation}
+💡 *Ideia da Tattoo:* ${idea}
 📅 *Data Preferida:* ${formattedDate}`;
+            }
 
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${TATTOO_WHATSAPP_NUMBER}&text=${encodeURIComponent(messageText)}`;
 
             // Populate Modal Summary
-            modalSummary.innerHTML = `
-                <div><strong>Cliente:</strong> ${name}</div>
-                <div><strong>Modalidade:</strong> ${typeText}</div>
-                <div><strong>Local:</strong> ${location}</div>
-                ${isOption2 ? `<div><strong>Endereço:</strong> ${finalAddress}</div>` : ''}
-                <div><strong>Projeto:</strong> ${idea}</div>
-                <div><strong>Data:</strong> ${formattedDate}</div>
-            `;
+            if (isOption2) {
+                modalSummary.innerHTML = `
+                    <div><strong>Cliente:</strong> ${name}</div>
+                    <div><strong>Modalidade:</strong> Tattoo Flash em Evento</div>
+                    <div><strong>Endereço:</strong> ${fullEventAddress}</div>
+                    <div><strong>Projeto:</strong> ${idea}</div>
+                    <div><strong>Data:</strong> ${formattedDate}</div>
+                `;
+            } else {
+                modalSummary.innerHTML = `
+                    <div><strong>Cliente:</strong> ${name}</div>
+                    <div><strong>Modalidade:</strong> Tatuagem no Estúdio</div>
+                    <div><strong>Cidade/Estúdio:</strong> ${studioLocation}</div>
+                    <div><strong>Projeto:</strong> ${idea}</div>
+                    <div><strong>Data:</strong> ${formattedDate}</div>
+                `;
+            }
 
             modalWaBtn.href = whatsappUrl;
 

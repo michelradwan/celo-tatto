@@ -603,18 +603,19 @@
                     <div class="mini-map-card">
                         <div class="mini-map-header">
                             <i class="fas fa-map-marked-alt"></i>
-                            <span>MAPA DE ATENDIMENTO DE EVENTOS</span>
+                            <span id="mapTitle">LOCALIZAÇÃO DO SEU EVENTO NO MAPA</span>
                         </div>
                         <iframe 
+                            id="googleMapIframe"
                             class="google-map-iframe"
-                            src="https://maps.google.com/maps?q=Acarau,Amontada,Ceara&t=&z=10&ie=UTF8&iwloc=&output=embed" 
+                            src="https://maps.google.com/maps?q=Acarau,Amontada,Ceara&t=&z=11&ie=UTF8&iwloc=&output=embed" 
                             width="100%" 
                             height="280" 
                             style="border:0; border-radius: 4px;" 
                             allowfullscreen="" 
                             loading="lazy">
                         </iframe>
-                        <p class="mini-map-sub"><i class="fas fa-truck-loading"></i> Estrutura completa de biossegurança levada diretamente para o seu evento em Acaraú, Amontada e região.</p>
+                        <p class="mini-map-sub" id="mapSubText"><i class="fas fa-truck-loading"></i> O mapa é atualizado automaticamente conforme você digita o CEP ou endereço do seu evento.</p>
                     </div>
                 </div>
 
@@ -632,19 +633,24 @@
                             </select>
                         </div>
 
-                        <!-- CIDADE DE ATENDIMENTO (EXIBIDO NA OPÇÃO 1) -->
+                        <!-- CIDADE DE ATENDIMENTO (EXIBIDO NA OPÇÃO 1 - 3 OPÇÕES EXATAS) -->
                         <div class="form-group" id="locationGroup">
                             <select id="userLocation" class="form-input">
                                 <option value="Acaraú - CE (Estúdio Próprio)" selected>Acaraú - CE (Estúdio Próprio)</option>
-                                <option value="Amontada - CE (Centro & Interior)">Amontada - CE (Centro & Interior)</option>
+                                <option value="Amontada - CE (Atendimento Programado)">Amontada - CE (Atendimento Programado)</option>
+                                <option value="Outro (Combinar Cidade / Região)">Outro (Combinar Cidade / Região)</option>
                             </select>
                         </div>
 
                         <!-- BUSCA DE CEP / ENDEREÇO & MINI MAPA (OCULTOS NA OPÇÃO 1, EXIBIDOS APENAS NA OPÇÃO 2) -->
                         <div id="option2AddressWrap" style="display: none;">
                             <div class="form-group flex-gap-sm">
-                                <input type="text" id="userCep" class="form-input" placeholder="Buscar CEP do Evento (ex: 62580-000)" maxlength="9">
-                                <input type="text" id="userAddress" class="form-input" placeholder="Endereço / Bairro do Evento">
+                                <input type="text" id="userCep" class="form-input" placeholder="CEP (ex: 62580-000)" maxlength="9">
+                                <input type="text" id="userAddress" class="form-input" placeholder="Rua, Bairro e Cidade do Evento">
+                            </div>
+
+                            <div class="form-group margin-top-xs">
+                                <input type="text" id="userNumber" class="form-input" placeholder="Número / Complemento (ex: Nº 100, Espaço de Festas)">
                             </div>
 
                             <div class="form-group checkbox-group">
