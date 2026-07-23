@@ -100,26 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Scroll Reveal Section Transition Animations (Intersection Observer)
+    // 3. Scroll Reveal Section Transition Animations
     const revealSections = document.querySelectorAll('.reveal-section');
-
-    const revealObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.12
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, revealObserverOptions);
-
     revealSections.forEach(section => {
-        revealObserver.observe(section);
+        section.classList.add('visible');
+        section.style.opacity = '1';
+        section.style.transform = 'none';
     });
 
     // 4. Horizontal Gallery Slider & Carousel

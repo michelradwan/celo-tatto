@@ -73,17 +73,15 @@ img {
     position: relative;
 }
 
-/* SECTION REVEAL TRANSITION ANIMATIONS */
+/* SECTION REVEAL TRANSITION ANIMATIONS (ALWAYS 100% VISIBLE) */
 .reveal-section {
-    opacity: 0;
-    transform: translateY(45px);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .reveal-section.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 /* SECTION TITLES */
