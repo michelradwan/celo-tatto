@@ -29,6 +29,7 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#hero">INÍCIO</a></li>
+                    <li><a href="#artist">O ARTISTA</a></li>
                     <li><a href="#services">SERVIÇOS</a></li>
                     <li><a href="#studio">O ESTÚDIO</a></li>
                     <li><a href="#gallery">GALERIA</a></li>
@@ -64,7 +65,7 @@
                     <span class="social-label">REDES SOCIAIS</span>
                     <div class="social-icons">
                         <a href="https://instagram.com/celotattoo.ink" target="_blank" aria-label="Instagram @celotattoo.ink"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/558586981745?text=Ol%C3%A1%2C%20Quero%20agendar%20um%20hor%C3%A1rio%20com%20a%20Cello%20Tatto" target="_blank" aria-label="WhatsApp +55 85 8698-1745"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/558586981745?text=Ol%C3%A1%2C%20Quero%20agendar%20um%20hor%C3%A1rio%20com%20o%20Celo%20Tattoo" target="_blank" aria-label="WhatsApp +55 85 8698-1745"><i class="fab fa-whatsapp"></i></a>
                         <a href="mailto:contatocelotattoo@outlook.com" aria-label="E-mail contatocelotattoo@outlook.com"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
@@ -137,9 +138,53 @@
                 </div>
             </div>
         </div>
+    <!-- SECTION 03 — O ARTISTA -->
+    <section class="artist-section reveal-section" id="artist">
+        <div class="container">
+            <div class="artist-layout">
+                <div class="artist-image-col">
+                    <div class="image-frame">
+                        <img src="images/foto_do_celo.png" alt="Marcelo Rodrigues de Souza — Celo Tattoo" loading="lazy">
+                        <div class="image-gold-border"></div>
+                    </div>
+                </div>
+
+                <div class="artist-content-col">
+                    <span class="artist-tag">CONHEÇA O ARTISTA</span>
+                    <h2 class="artist-title">Marcelo Rodrigues de Souza</h2>
+                    
+                    <div class="artist-bio">
+                        <p>Meu nome é Marcelo Rodrigues de Souza, tenho 27 anos e atuo como tatuador há mais de 5 anos. Sou especialista em <strong>Fine Line (traços finos)</strong>, um estilo que exige precisão, delicadeza e atenção aos mínimos detalhes. Ao mesmo tempo, gosto de explorar diferentes estilos de tatuagem, buscando sempre evoluir e oferecer um trabalho personalizado para cada cliente.</p>
+                        <p>Sou natural de Diadema, São Paulo, e atualmente moro em <strong>Acaraú, Ceará</strong>. Além dos atendimentos em meu estúdio, também realizo sessões com agenda em <strong>Amontada</strong>, atendendo tanto no centro da cidade quanto no interior.</p>
+                        <p>Acredito que cada tatuagem carrega uma história única. Por isso, meu compromisso é transformar a ideia de cada cliente em uma arte exclusiva, executada com qualidade, dedicação e segurança.</p>
+                    </div>
+
+                    <div class="artist-badges">
+                        <div class="artist-badge-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>5+ Anos de Carreira</span>
+                        </div>
+                        <div class="artist-badge-item">
+                            <i class="fas fa-feather-alt"></i>
+                            <span>Especialista Fine Line</span>
+                        </div>
+                        <div class="artist-badge-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Acaraú & Amontada - CE</span>
+                        </div>
+                    </div>
+
+                    <div class="artist-cta-wrap">
+                        <a href="https://wa.me/558586981745?text=Ol%C3%A1%2C%20Celo!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20sobre%20uma%20tatuagem" target="_blank" class="artist-cta-btn">
+                            <i class="fab fa-whatsapp"></i> FALAR DIRETO COM O CELO NO WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- SECTION 03 — THE STUDIO -->
+    <!-- SECTION 04 — THE STUDIO -->
     <section class="studio-section reveal-section" id="studio">
         <div class="container">
             <div class="studio-layout">
@@ -563,14 +608,37 @@
                             <input type="text" id="fullName" class="form-input" placeholder="Nome completo" required>
                         </div>
 
+                        <!-- TIPO DE SOLICITAÇÃO SELECTOR -->
+                        <div class="form-group">
+                            <select id="bookingType" class="form-input" required>
+                                <option value="" disabled selected hidden>Selecione a opção de atendimento</option>
+                                <option value="1ª Opção: Tatuagem no Estúdio / Fine Line">1ª Opção: Tatuagem no Estúdio / Fine Line</option>
+                                <option value="2ª Opção: Tattoo Flash em Eventos / No Seu Local">2ª Opção: Tattoo Flash em Eventos / No Seu Local</option>
+                            </select>
+                        </div>
+
                         <!-- CIDADE DE ATENDIMENTO SELECTOR -->
                         <div class="form-group">
                             <select id="userLocation" class="form-input" required>
-                                <option value="" disabled selected hidden>Selecione sua cidade de atendimento</option>
-                                <option value="Amontada - CE">Amontada - CE</option>
-                                <option value="Acaraú - CE">Acaraú - CE</option>
-                                <option value="Outro (Evento / Outra Região)">Outro (Evento / Outra Região)</option>
+                                <option value="" disabled selected hidden>Selecione a cidade / local</option>
+                                <option value="Acaraú - CE (Estúdio Próprio)">Acaraú - CE (Estúdio Próprio)</option>
+                                <option value="Amontada - CE (Centro & Interior)">Amontada - CE (Centro & Interior)</option>
+                                <option value="Outro / Digitar Endereço ou CEP">Outro / Digitar Endereço ou CEP</option>
+                                <option value="Combinar local exato pelo WhatsApp">Combinar local exato pelo WhatsApp</option>
                             </select>
+                        </div>
+
+                        <!-- BUSCA DE CEP / ENDEREÇO BRASIL API (OPCIONAL/DINÂMICO) -->
+                        <div class="form-group flex-gap-sm">
+                            <input type="text" id="userCep" class="form-input" placeholder="Buscar CEP (ex: 62580-000)" maxlength="9">
+                            <input type="text" id="userAddress" class="form-input" placeholder="Endereço / Bairro / Cidade (opcional)">
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="custom-checkbox-label">
+                                <input type="checkbox" id="whatsappLocationCheck">
+                                <span>Prefiro combinar o endereço exato diretamente pelo WhatsApp</span>
+                            </label>
                         </div>
 
                         <div class="form-group">

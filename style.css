@@ -504,6 +504,128 @@ img {
 }
 
 /* ==========================================================================
+   ARTIST SECTION (MARCELO RODRIGUES DE SOUZA - O ARTISTA)
+   ========================================================================== */
+.artist-section {
+    padding: 7rem 0;
+    background-color: var(--bg-dark);
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.artist-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.artist-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--gold-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.artist-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-white);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+}
+
+.artist-bio p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.artist-bio strong {
+    color: var(--gold-primary);
+}
+
+.artist-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.artist-badge-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.artist-badge-item i {
+    color: var(--gold-primary);
+    font-size: 0.95rem;
+}
+
+.artist-cta-wrap {
+    margin-top: 1.5rem;
+}
+
+.artist-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--gold-gradient);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 1rem 1.75rem;
+    border-radius: 4px;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+    transition: var(--transition);
+}
+
+.artist-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.55);
+}
+
+.flex-gap-sm {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.75rem;
+}
+
+.checkbox-group {
+    margin: 0.25rem 0 0.85rem 0;
+}
+
+.custom-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+}
+
+.custom-checkbox-label input[type="checkbox"] {
+    accent-color: var(--gold-primary);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
    GALLERY SECTIONS
    ========================================================================== */
 .gallery-section {
@@ -1698,6 +1820,10 @@ select.form-input option {
     .service-card,
     .service-name,
     .service-desc,
+    .artist-content-col,
+    .artist-title,
+    .artist-bio,
+    .artist-badges,
     .studio-content-col,
     .studio-title,
     .studio-text,
@@ -1819,6 +1945,7 @@ select.form-input option {
     }
     
     .services-grid,
+    .artist-layout,
     .studio-layout,
     .barber-layout,
     .events-layout,

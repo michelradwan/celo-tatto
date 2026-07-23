@@ -273,15 +273,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const successModal = document.getElementById('successModal');
     const modalWaBtn = document.getElementById('modalWaBtn');
     const modalSummary = document.getElementById('modalSummary');
+    const userCep = document.getElementById('userCep');
+    const userAddress = document.getElementById('userAddress');
+    const whatsappLocationCheck = document.getElementById('whatsappLocationCheck');
 
     const TATTOO_WHATSAPP_NUMBER = '558586981745';
+
+    // ViaCEP API Brazil Auto Lookup
+    if (userCep) {
+        userCep.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 5) {
+                val = val.substring(0, 5) + '-' + val.substring(5, 8);
+            }
+            e.target.value = val;
+        });
+
+        userCep.addEventListener('blur', () => {
+            const rawCep = userCep.value.replace(/\D/g, '');
+            if (rawCep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${rawCep}/json/`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.erro && userAddress) {
+                            userAddress.value = `${data.logradouro ? data.logradouro + ', ' : ''}${data.bairro ? data.bairro + ' - ' : ''}${data.localidade}/${data.uf}`;
+                        }
+                    })
+                    .catch(() => {});
+            }
+        });
+    }
+
+    if (whatsappLocationCheck) {
+        whatsappLocationCheck.addEventListener('change', () => {
+            if (whatsappLocationCheck.checked) {
+                if (userAddress) userAddress.value = 'Combinar endereço exato pelo WhatsApp';
+                if (userCep) userCep.value = '';
+            } else {
+                if (userAddress) userAddress.value = '';
+            }
+        });
+    }
 
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const name = document.getElementById('fullName').value.trim();
+            const type = document.getElementById('bookingType') ? document.getElementById('bookingType').value : 'Tatuagem no Estúdio';
             const location = document.getElementById('userLocation').value;
+            const address = userAddress ? userAddress.value.trim() : '';
             const idea = document.getElementById('tattooIdea').value.trim();
             const dateVal = document.getElementById('preferredDate').value;
 
@@ -293,11 +334,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            let finalAddress = address;
+            if (whatsappLocationCheck && whatsappLocationCheck.checked) {
+                finalAddress = 'Combinar endereço exato pelo WhatsApp';
+            } else if (!finalAddress) {
+                finalAddress = 'A combinar no WhatsApp';
+            }
+
             const messageText = 
 `🔥 *SOLICITAÇÃO DE AGENDAMENTO — CELO TATTOO* 🔥
 
 👤 *Nome:* ${name}
-📍 *Cidade de Atendimento:* ${location}
+📌 *Opção de Atendimento:* ${type}
+📍 *Cidade/Local:* ${location}
+🏡 *Endereço/Bairro:* ${finalAddress}
 💡 *Ideia da Tattoo:* ${idea}
 📅 *Data Preferida:* ${formattedDate}`;
 
@@ -306,7 +356,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate Modal Summary
             modalSummary.innerHTML = `
                 <div><strong>Cliente:</strong> ${name}</div>
-                <div><strong>Cidade:</strong> ${location}</div>
+                <div><strong>Opção:</strong> ${type}</div>
+                <div><strong>Local:</strong> ${location}</div>
+                <div><strong>Endereço:</strong> ${finalAddress}</div>
                 <div><strong>Projeto:</strong> ${idea}</div>
                 <div><strong>Data:</strong> ${formattedDate}</div>
             `;
