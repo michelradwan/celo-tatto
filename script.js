@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroContent = document.querySelector('.hero-content');
     const heroOverlay = document.querySelector('.hero-overlay');
 
-    let targetScrollY = 0;
-    let currentScrollY = 0;
+    let targetScrollY = window.scrollY;
+    let currentScrollY = window.scrollY;
 
     // Linear Interpolation helper for 240fps-like butter smoothness with soft inertia
     function lerp(start, end, factor) {
@@ -276,8 +276,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const userCep = document.getElementById('userCep');
     const userAddress = document.getElementById('userAddress');
     const whatsappLocationCheck = document.getElementById('whatsappLocationCheck');
+    const bookingType = document.getElementById('bookingType');
+    const locationGroup = document.getElementById('locationGroup');
+    const option2AddressWrap = document.getElementById('option2AddressWrap');
+    const eventMiniMapCol = document.getElementById('eventMiniMapCol');
+    const bookingInfoCol = document.getElementById('bookingInfoCol');
 
     const TATTOO_WHATSAPP_NUMBER = '558586981745';
+
+    // Dynamic View Toggle for Option 1 vs Option 2
+    function updateBookingView() {
+        if (!bookingType) return;
+        const val = bookingType.value;
+        if (val === 'option2') {
+            // Opção 2: Tattoo Flash para Eventos / No Seu Local
+            if (locationGroup) locationGroup.style.display = 'none';
+            if (option2AddressWrap) option2AddressWrap.style.display = 'block';
+            if (eventMiniMapCol) eventMiniMapCol.style.display = 'block';
+            if (bookingInfoCol) bookingInfoCol.style.display = 'none';
+        } else {
+            // Opção 1 (PADRÃO): Agendar Horário para Tatuar (Estúdio)
+            if (locationGroup) locationGroup.style.display = 'block';
+            if (option2AddressWrap) option2AddressWrap.style.display = 'none';
+            if (eventMiniMapCol) eventMiniMapCol.style.display = 'none';
+            if (bookingInfoCol) bookingInfoCol.style.display = 'block';
+        }
+    }
+
+    if (bookingType) {
+        bookingType.addEventListener('change', updateBookingView);
+        updateBookingView(); // Ensure Option 1 is pre-selected and rendered by default
+    }
 
     // ViaCEP API Brazil Auto Lookup
     if (userCep) {
@@ -320,8 +349,10 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const name = document.getElementById('fullName').value.trim();
-            const type = document.getElementById('bookingType') ? document.getElementById('bookingType').value : 'Tatuagem no Estúdio';
-            const location = document.getElementById('userLocation').value;
+            const isOption2 = bookingType && bookingType.value === 'option2';
+            const typeText = isOption2 ? '2ª Opção: Tattoo Flash para Eventos / No Seu Local' : '1ª Opção: Agendar Horário para Tatuar (Estúdio)';
+            const locationSelect = document.getElementById('userLocation');
+            const location = isOption2 ? 'Evento / No Local do Cliente' : (locationSelect ? locationSelect.value : 'Estúdio Acaraú / Amontada');
             const address = userAddress ? userAddress.value.trim() : '';
             const idea = document.getElementById('tattooIdea').value.trim();
             const dateVal = document.getElementById('preferredDate').value;
@@ -334,21 +365,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            let finalAddress = address;
-            if (whatsappLocationCheck && whatsappLocationCheck.checked) {
-                finalAddress = 'Combinar endereço exato pelo WhatsApp';
-            } else if (!finalAddress) {
-                finalAddress = 'A combinar no WhatsApp';
+            let finalAddress = 'Não aplicável (Atendimento no Estúdio)';
+            if (isOption2) {
+                if (whatsappLocationCheck && whatsappLocationCheck.checked) {
+                    finalAddress = 'Combinar endereço exato pelo WhatsApp';
+                } else if (address) {
+                    finalAddress = address;
+                } else {
+                    finalAddress = 'Combinar local exato pelo WhatsApp';
+                }
             }
 
             const messageText = 
 `🔥 *SOLICITAÇÃO DE AGENDAMENTO — CELO TATTOO* 🔥
 
 👤 *Nome:* ${name}
-📌 *Opção de Atendimento:* ${type}
-📍 *Cidade/Local:* ${location}
-🏡 *Endereço/Bairro:* ${finalAddress}
-💡 *Ideia da Tattoo:* ${idea}
+📌 *Modalidade:* ${typeText}
+📍 *Local/Cidade:* ${location}
+${isOption2 ? `🏡 *Endereço do Evento:* ${finalAddress}\n` : ''}💡 *Projeto / Ideia:* ${idea}
 📅 *Data Preferida:* ${formattedDate}`;
 
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${TATTOO_WHATSAPP_NUMBER}&text=${encodeURIComponent(messageText)}`;
@@ -356,9 +390,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate Modal Summary
             modalSummary.innerHTML = `
                 <div><strong>Cliente:</strong> ${name}</div>
-                <div><strong>Opção:</strong> ${type}</div>
+                <div><strong>Modalidade:</strong> ${typeText}</div>
                 <div><strong>Local:</strong> ${location}</div>
-                <div><strong>Endereço:</strong> ${finalAddress}</div>
+                ${isOption2 ? `<div><strong>Endereço:</strong> ${finalAddress}</div>` : ''}
                 <div><strong>Projeto:</strong> ${idea}</div>
                 <div><strong>Data:</strong> ${formattedDate}</div>
             `;
@@ -373,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.open(whatsappUrl, '_blank');
                 successModal.classList.remove('active');
                 bookingForm.reset();
+                updateBookingView(); // Reset view to Option 1 default
             };
         });
     }

@@ -588,7 +588,7 @@
         <div class="container">
             <div class="booking-layout">
                 
-                <div class="booking-info-col">
+                <div class="booking-info-col" id="bookingInfoCol">
                     <h2 class="cta-title">Pronto Para Criar Sua Obra De Arte?</h2>
                     <p class="cta-subtitle">PEÇA SEU ORÇAMENTO AGORA PELO WHATSAPP</p>
 
@@ -598,47 +598,65 @@
                     </div>
                 </div>
 
+                <!-- MINI MAPA COLUNA (EXIBIDO APENAS NA OPÇÃO 2) -->
+                <div class="booking-map-col" id="eventMiniMapCol" style="display: none;">
+                    <div class="mini-map-card">
+                        <div class="mini-map-header">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <span>MAPA DE ATENDIMENTO DE EVENTOS</span>
+                        </div>
+                        <iframe 
+                            class="google-map-iframe"
+                            src="https://maps.google.com/maps?q=Acarau,Amontada,Ceara&t=&z=10&ie=UTF8&iwloc=&output=embed" 
+                            width="100%" 
+                            height="280" 
+                            style="border:0; border-radius: 4px;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                        <p class="mini-map-sub"><i class="fas fa-truck-loading"></i> Estrutura completa de biossegurança levada diretamente para o seu evento em Acaraú, Amontada e região.</p>
+                    </div>
+                </div>
+
                 <div class="booking-form-col">
                     <form class="luxury-form" id="bookingForm">
                         <div class="form-group">
                             <input type="text" id="fullName" class="form-input" placeholder="Nome completo" required>
                         </div>
 
-                        <!-- TIPO DE SOLICITAÇÃO SELECTOR -->
+                        <!-- TIPO DE SOLICITAÇÃO SELECTOR (OPÇÃO 1 PADRÃO) -->
                         <div class="form-group">
                             <select id="bookingType" class="form-input" required>
-                                <option value="" disabled selected hidden>Selecione a opção de atendimento</option>
-                                <option value="1ª Opção: Tatuagem no Estúdio / Fine Line">1ª Opção: Tatuagem no Estúdio / Fine Line</option>
-                                <option value="2ª Opção: Tattoo Flash em Eventos / No Seu Local">2ª Opção: Tattoo Flash em Eventos / No Seu Local</option>
+                                <option value="option1" selected>1ª Opção: Agendar Horário para Tatuar (Estúdio)</option>
+                                <option value="option2">2ª Opção: Tattoo Flash para Eventos / No Seu Local</option>
                             </select>
                         </div>
 
-                        <!-- CIDADE DE ATENDIMENTO SELECTOR -->
-                        <div class="form-group">
-                            <select id="userLocation" class="form-input" required>
-                                <option value="" disabled selected hidden>Selecione a cidade / local</option>
-                                <option value="Acaraú - CE (Estúdio Próprio)">Acaraú - CE (Estúdio Próprio)</option>
+                        <!-- CIDADE DE ATENDIMENTO (EXIBIDO NA OPÇÃO 1) -->
+                        <div class="form-group" id="locationGroup">
+                            <select id="userLocation" class="form-input">
+                                <option value="Acaraú - CE (Estúdio Próprio)" selected>Acaraú - CE (Estúdio Próprio)</option>
                                 <option value="Amontada - CE (Centro & Interior)">Amontada - CE (Centro & Interior)</option>
-                                <option value="Outro / Digitar Endereço ou CEP">Outro / Digitar Endereço ou CEP</option>
-                                <option value="Combinar local exato pelo WhatsApp">Combinar local exato pelo WhatsApp</option>
                             </select>
                         </div>
 
-                        <!-- BUSCA DE CEP / ENDEREÇO BRASIL API (OPCIONAL/DINÂMICO) -->
-                        <div class="form-group flex-gap-sm">
-                            <input type="text" id="userCep" class="form-input" placeholder="Buscar CEP (ex: 62580-000)" maxlength="9">
-                            <input type="text" id="userAddress" class="form-input" placeholder="Endereço / Bairro / Cidade (opcional)">
-                        </div>
+                        <!-- BUSCA DE CEP / ENDEREÇO & MINI MAPA (OCULTOS NA OPÇÃO 1, EXIBIDOS APENAS NA OPÇÃO 2) -->
+                        <div id="option2AddressWrap" style="display: none;">
+                            <div class="form-group flex-gap-sm">
+                                <input type="text" id="userCep" class="form-input" placeholder="Buscar CEP do Evento (ex: 62580-000)" maxlength="9">
+                                <input type="text" id="userAddress" class="form-input" placeholder="Endereço / Bairro do Evento">
+                            </div>
 
-                        <div class="form-group checkbox-group">
-                            <label class="custom-checkbox-label">
-                                <input type="checkbox" id="whatsappLocationCheck">
-                                <span>Prefiro combinar o endereço exato diretamente pelo WhatsApp</span>
-                            </label>
+                            <div class="form-group checkbox-group">
+                                <label class="custom-checkbox-label">
+                                    <input type="checkbox" id="whatsappLocationCheck">
+                                    <span>Prefiro combinar o endereço exato diretamente pelo WhatsApp</span>
+                                </label>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" id="tattooIdea" class="form-input" placeholder="Sua ideia de tattoo (descrição, tamanho, local no corpo)" required>
+                            <input type="text" id="tattooIdea" class="form-input" placeholder="Sua ideia de tattoo ou evento (descrição, estilo, tamanho)" required>
                         </div>
 
                         <div class="form-group">

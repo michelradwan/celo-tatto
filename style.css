@@ -1529,6 +1529,56 @@ img {
     align-items: center;
 }
 
+.form-label-gold {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--gold-primary);
+    margin-bottom: 0.5rem;
+}
+
+.mini-map-card {
+    background: rgba(18, 18, 18, 0.9);
+    border: 1px solid var(--gold-primary);
+    border-radius: 4px;
+    padding: 1.25rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.mini-map-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.google-map-iframe {
+    border-radius: 4px;
+    display: block;
+}
+
+.mini-map-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-top: 1rem;
+}
+
+.mini-map-sub i {
+    color: var(--gold-primary);
+}
+
 .cta-title {
     font-family: var(--font-heading);
     font-size: 3.5rem;
