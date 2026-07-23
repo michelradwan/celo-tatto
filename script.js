@@ -31,50 +31,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Extended Pinned Hero Motion (Responsive for Mobile, Tablet & Desktop)
-        if (heroWrapper && heroSection) {
+        // Extended Pinned Hero Motion (Desktop only > 1199px)
+        if (heroWrapper && heroSection && window.innerWidth > 1199) {
             const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
             
             if (wrapperHeight > 0) {
                 const rawProgress = Math.min(1, Math.max(0, currentScrollY / wrapperHeight));
-                const isMobile = window.innerWidth <= 768;
-
-                // PHASE 1 (0% to 70% of scroll runway): Image lowers and zooms while text glides up
                 const panProgress = Math.min(1, rawProgress / 0.7);
 
-                // Responsive translation scaling to prevent mobile overflow/clipping
-                const maxBgTranslate = isMobile ? 45 : 160;
-                const maxBgScale = isMobile ? 0.12 : 0.22;
-                const maxContentTranslate = isMobile ? 45 : 95;
-
-                // A. Background Photo Lowers Down & Zooms Silky Smooth
                 if (heroBg) {
-                    const bgScale = 1 + panProgress * maxBgScale;
-                    const bgTranslateY = panProgress * maxBgTranslate;
+                    const bgScale = 1 + panProgress * 0.22;
+                    const bgTranslateY = panProgress * 160;
                     heroBg.style.transform = `translate3d(0, ${bgTranslateY.toFixed(2)}px, 0) scale(${bgScale.toFixed(4)})`;
                 }
 
-                // B. Hero Text Content Fades Out and Moves Upward
                 if (heroContent) {
-                    const contentOpacity = Math.max(0, 1 - panProgress * (isMobile ? 1.4 : 1.25));
-                    const contentTranslateY = -panProgress * maxContentTranslate;
+                    const contentOpacity = Math.max(0, 1 - panProgress * 1.25);
+                    const contentTranslateY = -panProgress * 95;
                     heroContent.style.opacity = contentOpacity.toFixed(4);
                     heroContent.style.transform = `translate3d(0, ${contentTranslateY.toFixed(2)}px, 0)`;
                 }
 
-                // C. Overlay Darkens Gradually
                 if (heroOverlay) {
                     const overlayOpacity = Math.min(0.95, 0.4 + panProgress * 0.55);
                     heroOverlay.style.opacity = overlayOpacity.toFixed(4);
                 }
 
-                // PHASE 2 (70% to 100% of scroll runway): Section completes exit opacity fade
                 if (rawProgress > 0.7) {
                     const exitProgress = (rawProgress - 0.7) / 0.3;
                     heroSection.style.opacity = Math.max(0, 1 - exitProgress * 1.5).toFixed(4);
                 } else {
                     heroSection.style.opacity = '1';
                 }
+            }
+        } else if (heroSection) {
+            // Tablet & Mobile (<= 1199px): Ensure 100% visibility & zero black screen overlay!
+            heroSection.style.opacity = '1';
+            if (heroContent) {
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'none';
+            }
+            if (heroBg) {
+                heroBg.style.transform = 'none';
             }
         }
 

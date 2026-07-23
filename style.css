@@ -2002,13 +2002,17 @@ select.form-input option {
     }
 
     .hero-wrapper {
-        height: 180vh;
+        height: auto !important;
+        position: relative !important;
     }
 
     .hero-section {
-        height: 100vh;
-        height: 100dvh;
-        padding: 7rem 2rem 3rem 2rem;
+        position: relative !important;
+        height: auto !important;
+        min-height: 85vh !important;
+        min-height: 85dvh !important;
+        padding: 7rem 2rem 4rem 2rem !important;
+        opacity: 1 !important;
     }
 
     .hero-bg {
