@@ -2000,16 +2000,17 @@ select.form-input option {
     }
 
     .hero-wrapper {
-        height: auto !important;
-        position: relative !important;
+        position: relative;
+        height: 160vh;
     }
 
     .hero-section {
-        position: relative !important;
-        height: auto !important;
-        min-height: 85vh !important;
-        min-height: 85dvh !important;
-        padding: 7rem 2rem 4rem 2rem !important;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100dvh;
+        padding: 7rem 2rem 3rem 2rem;
+        background-color: var(--bg-dark);
         opacity: 1 !important;
     }
 
