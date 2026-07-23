@@ -1,0 +1,4 @@
+# Ignore temporary or zip files
+*.zip
+extracted_gallery/
+.tempmediaStorage/
