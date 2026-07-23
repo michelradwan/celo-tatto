@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 👤 *Nome:* ${name}
 📌 *Modalidade:* 1ª Opção: Agendar Horário para Tatuar (Estúdio)
-📍 *Cidade / Estúdio:* ${studioLocation}
+📍 *Cidade de Origem (De onde você é):* ${studioLocation}
 💡 *Ideia da Tattoo:* ${idea}
 📅 *Data Preferida:* ${formattedDate}`;
             }
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalSummary.innerHTML = `
                     <div><strong>Cliente:</strong> ${name}</div>
                     <div><strong>Modalidade:</strong> Tatuagem no Estúdio</div>
-                    <div><strong>Cidade/Estúdio:</strong> ${studioLocation}</div>
+                    <div><strong>Cidade de Origem:</strong> ${studioLocation}</div>
                     <div><strong>Projeto:</strong> ${idea}</div>
                     <div><strong>Data:</strong> ${formattedDate}</div>
                 `;
