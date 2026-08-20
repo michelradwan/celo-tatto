@@ -484,19 +484,23 @@ img {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    gap: 2rem;
+    align-items: stretch;
+    width: 100%;
 }
 
 .service-card {
     background: var(--bg-card);
     border: 1px solid var(--border-gold);
-    padding: 2.5rem;
+    padding: 2.25rem 2rem;
     display: flex;
-    gap: 1.75rem;
+    gap: 1.5rem;
     align-items: flex-start;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .service-card::before {
@@ -513,7 +517,7 @@ img {
 .service-card:hover {
     background: var(--bg-card-hover);
     border-color: var(--gold-primary);
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -523,8 +527,8 @@ img {
 
 .service-icon {
     flex-shrink: 0;
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border-radius: 4px;
     background: rgba(212, 175, 55, 0.08);
     border: 1px solid var(--border-gold);
@@ -533,11 +537,17 @@ img {
     justify-content: center;
 }
 
+.service-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .service-name {
     font-family: var(--font-body);
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     margin-bottom: 0.5rem;
     color: var(--text-white);
 }
