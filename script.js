@@ -502,4 +502,260 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 8. Cello Tattoo — Premium "Agenda Aberta" Pop-Up Modal & Bottom Sheet System
+    const celloBookingPopup = document.getElementById('celloBookingPopup');
+    const celloBookingBackdrop = document.getElementById('celloBookingBackdrop');
+    const celloBookingModal = document.getElementById('celloBookingModal');
+    const celloBookingClose = document.getElementById('celloBookingClose');
+    const celloBookingWaCta = document.getElementById('celloBookingWaCta');
+    const celloBookingGalleryCta = document.getElementById('celloBookingGalleryCta');
+    const celloBookingTrigger = document.getElementById('celloBookingTrigger');
+
+    if (celloBookingPopup && celloBookingModal) {
+        const STORAGE_KEY = 'cello_booking_popup_last_seen';
+        const FREQUENCY_CAP_HOURS = 24;
+        const FREQUENCY_CAP_MS = FREQUENCY_CAP_HOURS * 60 * 60 * 1000;
+
+        let hasAutoTriggered = false;
+        let isPopupOpen = false;
+        let lastFocusedElement = null;
+
+        // Analytics / Event Dispatcher Helper (Non-blocking)
+        function trackBookingPopupEvent(eventName, triggerSource) {
+            const isMobile = window.innerWidth <= 900;
+            const payload = {
+                campaign: 'agenda_setembro',
+                professional: 'cello_tattoo',
+                trigger: triggerSource || 'unknown',
+                device: isMobile ? 'mobile' : 'desktop',
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                window.dispatchEvent(new CustomEvent(eventName, { detail: payload }));
+            } catch (e) {}
+
+            if (Array.isArray(window.dataLayer)) {
+                window.dataLayer.push({ event: eventName, ...payload });
+            }
+
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', eventName, payload);
+            }
+        }
+
+        // Frequency Cap Helpers
+        function isFrequencyCapped() {
+            try {
+                const storedTime = localStorage.getItem(STORAGE_KEY);
+                if (!storedTime) return false;
+                const timeDiff = Date.now() - parseInt(storedTime, 10);
+                return timeDiff < FREQUENCY_CAP_MS;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function setFrequencyCapTimestamp() {
+            try {
+                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+            } catch (e) {}
+        }
+
+        // Helper exposed to QA / dev console
+        window.clearCelloPopupCap = function() {
+            try {
+                localStorage.removeItem(STORAGE_KEY);
+                console.log('%c[Cello Tattoo] Frequency cap cleared!', 'color: #D4AF37; font-weight: bold;');
+            } catch (e) {}
+        };
+
+        // Open Modal Function
+        function openBookingPopup(triggerSource) {
+            if (isPopupOpen) return;
+            isPopupOpen = true;
+            lastFocusedElement = document.activeElement;
+
+            celloBookingPopup.style.display = 'flex';
+            // Force reflow for smooth CSS transitions
+            void celloBookingPopup.offsetWidth;
+
+            celloBookingPopup.classList.add('active');
+            celloBookingPopup.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('booking-popup-locked');
+
+            trackBookingPopupEvent('booking_popup_view', triggerSource);
+
+            // Focus management: focus close button or first action
+            if (celloBookingClose) {
+                setTimeout(() => celloBookingClose.focus(), 80);
+            }
+        }
+
+        // Close Modal Function
+        function closeBookingPopup(source) {
+            if (!isPopupOpen) return;
+            isPopupOpen = false;
+
+            celloBookingPopup.classList.remove('active');
+            celloBookingPopup.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('booking-popup-locked');
+
+            setFrequencyCapTimestamp();
+            trackBookingPopupEvent('booking_popup_close', source);
+
+            // Show floating reopen badge
+            if (celloBookingTrigger) {
+                celloBookingTrigger.style.display = 'inline-flex';
+            }
+
+            setTimeout(() => {
+                if (!isPopupOpen) {
+                    celloBookingPopup.style.display = 'none';
+                }
+            }, 300);
+
+            // Return focus
+            if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+                lastFocusedElement.focus();
+            }
+        }
+
+        // Trigger Controller with Dedup
+        function attemptAutoTrigger(triggerSource) {
+            if (hasAutoTriggered || isPopupOpen) return;
+            if (isFrequencyCapped()) {
+                // If frequency capped, show the discreet floating reopen button
+                if (celloBookingTrigger) {
+                    celloBookingTrigger.style.display = 'inline-flex';
+                }
+                return;
+            }
+
+            hasAutoTriggered = true;
+            openBookingPopup(triggerSource);
+        }
+
+        // 1. Timer Trigger: 8 Seconds
+        const timerId = setTimeout(() => {
+            attemptAutoTrigger('timer');
+        }, 8000);
+
+        // 2. Scroll Trigger: 40% Scroll Depth
+        function handleScrollTrigger() {
+            if (hasAutoTriggered) {
+                window.removeEventListener('scroll', handleScrollTrigger);
+                return;
+            }
+
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (docHeight <= 0) return;
+
+            const scrollPercentage = (window.scrollY / docHeight) * 100;
+            if (scrollPercentage >= 40) {
+                clearTimeout(timerId);
+                attemptAutoTrigger('scroll');
+                window.removeEventListener('scroll', handleScrollTrigger);
+            }
+        }
+
+        window.addEventListener('scroll', handleScrollTrigger, { passive: true });
+
+        // 3. Desktop Exit Intent Trigger (Desktop only, mouse leaves top)
+        function handleExitIntent(e) {
+            if (window.innerWidth > 900 && e.clientY <= 10 && !hasAutoTriggered && !isPopupOpen) {
+                if (!isFrequencyCapped()) {
+                    clearTimeout(timerId);
+                    window.removeEventListener('scroll', handleScrollTrigger);
+                    attemptAutoTrigger('exit');
+                }
+            }
+        }
+
+        document.addEventListener('mouseleave', handleExitIntent);
+
+        // Close Event Listeners
+        if (celloBookingClose) {
+            celloBookingClose.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeBookingPopup('close_button');
+            });
+        }
+
+        if (celloBookingBackdrop) {
+            celloBookingBackdrop.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeBookingPopup('backdrop');
+            });
+        }
+
+        // Keyboard Navigation (ESC & Focus Trap)
+        document.addEventListener('keydown', (e) => {
+            if (!isPopupOpen) return;
+
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                e.preventDefault();
+                closeBookingPopup('esc_key');
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                const focusableSelectors = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+                const focusableElements = Array.from(celloBookingModal.querySelectorAll(focusableSelectors));
+                if (focusableElements.length === 0) return;
+
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement || document.activeElement === celloBookingPopup) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        });
+
+        // Floating Reopen Trigger
+        if (celloBookingTrigger) {
+            // Check if already capped on load, reveal floating trigger
+            if (isFrequencyCapped()) {
+                celloBookingTrigger.style.display = 'inline-flex';
+            }
+
+            celloBookingTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                trackBookingPopupEvent('booking_popup_reopen', 'manual');
+                openBookingPopup('manual');
+            });
+        }
+
+        // WhatsApp CTA Click Tracking
+        if (celloBookingWaCta) {
+            celloBookingWaCta.addEventListener('click', () => {
+                trackBookingPopupEvent('booking_whatsapp_click', 'cta_button');
+            });
+        }
+
+        // Secondary Gallery CTA
+        if (celloBookingGalleryCta) {
+            celloBookingGalleryCta.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeBookingPopup('gallery_nav');
+                const gallerySection = document.getElementById('gallery');
+                if (gallerySection) {
+                    setTimeout(() => {
+                        gallerySection.scrollIntoView({ behavior: 'smooth' });
+                    }, 150);
+                }
+            });
+        }
+    }
+
 });

@@ -16,6 +16,9 @@
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Preload Booking Poster Image (Non-blocking) -->
+    <link rel="preload" href="images/agenda_aberta_oficial.png" as="image" fetchpriority="low">
 </head>
 <body>
 
@@ -750,6 +753,126 @@
             </a>
         </div>
     </div>
+
+    <!-- ==========================================================================
+         CELLO TATTOO — POP-UP PREMIUM "AGENDA ABERTA" (DESKTOP MODAL / MOBILE SHEET)
+         ========================================================================== -->
+    <div class="booking-popup-overlay" id="celloBookingPopup" role="dialog" aria-modal="true" aria-labelledby="celloBookingTitle" aria-describedby="celloBookingDesc" aria-hidden="true" style="display: none;">
+        <div class="booking-popup-backdrop" id="celloBookingBackdrop"></div>
+        <div class="booking-popup-modal" id="celloBookingModal">
+            
+            <!-- Close Button (Min 44x44px accessible touch area) -->
+            <button class="booking-popup-close" id="celloBookingClose" aria-label="Fechar aviso de agenda aberta">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+
+            <div class="booking-popup-grid">
+                
+                <!-- Left / Top Column: Authentic Real Art Asset (100% Unaltered) -->
+                <div class="booking-popup-media">
+                    <div class="booking-popup-media-frame">
+                        <img 
+                            src="images/agenda_aberta_oficial.png" 
+                            alt="Celo Tattoo — Agenda Aberta Oficial Setembro" 
+                            class="booking-popup-img"
+                            loading="eager"
+                            decoding="async"
+                        >
+                    </div>
+                </div>
+
+                <!-- Right / Bottom Column: Structured HTML Schedule & CTAs -->
+                <div class="booking-popup-content">
+                    
+                    <!-- Header with Live Status & Title -->
+                    <div class="booking-popup-header">
+                        <div class="booking-badge-live">
+                            <span class="badge-dot-live"></span>
+                            <span class="badge-text-live">DISPONÍVEL</span>
+                        </div>
+                        <h2 class="booking-popup-title" id="celloBookingTitle">AGENDA ABERTA</h2>
+                        <p class="booking-popup-subhead" id="celloBookingDesc">
+                            <strong>Cello Tattoo</strong> está com agenda aberta para <span>setembro</span>.
+                        </p>
+                    </div>
+
+                    <!-- Structured Schedule Cards (Real HTML) -->
+                    <div class="booking-schedule-list">
+                        
+                        <!-- Block 1: Amontada -->
+                        <div class="booking-schedule-card">
+                            <div class="schedule-card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="schedule-card-info">
+                                <div class="schedule-date-badge">05/09 — 11/09</div>
+                                <div class="schedule-city-name">AMONTADA</div>
+                                <div class="schedule-detail-text">Centro</div>
+                            </div>
+                        </div>
+
+                        <!-- Block 2: Aracatiara -->
+                        <div class="booking-schedule-card">
+                            <div class="schedule-card-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="schedule-card-info">
+                                <div class="schedule-date-badge">12/09</div>
+                                <div class="schedule-city-name">ARACATIARA</div>
+                                <div class="schedule-detail-text">Interior</div>
+                            </div>
+                        </div>
+
+                        <!-- Block 3: Icaraizinho de Amontada -->
+                        <div class="booking-schedule-card">
+                            <div class="schedule-card-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="schedule-card-info">
+                                <div class="schedule-date-badge">13/09</div>
+                                <div class="schedule-city-name">ICARAIZINHO DE AMONTADA</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Deposit Notice (Microcopy) -->
+                    <div class="booking-deposit-notice">
+                        <i class="fas fa-lock"></i>
+                        <span>Agendamentos somente após o pagamento do sinal.</span>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="booking-popup-actions">
+                        <a 
+                            href="https://wa.me/5585986981745?text=Ol%C3%A1%2C%20Cello!%20Vi%20no%20site%20que%20sua%20agenda%20est%C3%A1%20aberta%20e%20gostaria%20de%20consultar%20um%20hor%C3%A1rio%20para%20fazer%20uma%20tattoo." 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            class="booking-cta-primary" 
+                            id="celloBookingWaCta"
+                        >
+                            <i class="fab fa-whatsapp"></i>
+                            <span>AGENDAR PELO WHATSAPP</span>
+                        </a>
+
+                        <a href="#gallery" class="booking-cta-secondary" id="celloBookingGalleryCta">
+                            <span>VER TRABALHOS</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING REOPEN TRIGGER (Discreet Badge after closing) -->
+    <button class="booking-floating-trigger" id="celloBookingTrigger" aria-label="Ver Agenda Aberta Cello Tattoo" style="display: none;">
+        <span class="floating-badge-dot"></span>
+        <i class="fas fa-calendar-alt"></i>
+        <span class="floating-badge-text">AGENDA ABERTA</span>
+    </button>
 
     <!-- Custom Scripts -->
     <script src="script.js"></script>
