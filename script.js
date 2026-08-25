@@ -502,17 +502,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Cello Tattoo — Premium "Agenda Aberta" Pop-Up Modal & Bottom Sheet System
-    const celloBookingPopup = document.getElementById('celloBookingPopup');
-    const celloBookingBackdrop = document.getElementById('celloBookingBackdrop');
-    const celloBookingModal = document.getElementById('celloBookingModal');
-    const celloBookingClose = document.getElementById('celloBookingClose');
-    const celloBookingWaCta = document.getElementById('celloBookingWaCta');
-    const celloBookingGalleryCta = document.getElementById('celloBookingGalleryCta');
-    const celloBookingTrigger = document.getElementById('celloBookingTrigger');
+    // 8. Celo Tattoo — Premium "Agenda Aberta" Pop-Up Modal & Bottom Sheet System
+    const celoBookingPopup = document.getElementById('celoBookingPopup');
+    const celoBookingBackdrop = document.getElementById('celoBookingBackdrop');
+    const celoBookingModal = document.getElementById('celoBookingModal');
+    const celoBookingClose = document.getElementById('celoBookingClose');
+    const celoBookingWaCta = document.getElementById('celoBookingWaCta');
+    const celoBookingGalleryCta = document.getElementById('celoBookingGalleryCta');
+    const celoBookingTrigger = document.getElementById('celoBookingTrigger');
 
-    if (celloBookingPopup && celloBookingModal) {
-        const STORAGE_KEY = 'cello_booking_popup_last_seen';
+    if (celoBookingPopup && celoBookingModal) {
+        const STORAGE_KEY = 'celo_booking_popup_last_seen';
         const FREQUENCY_CAP_HOURS = 24;
         const FREQUENCY_CAP_MS = FREQUENCY_CAP_HOURS * 60 * 60 * 1000;
 
@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isMobile = window.innerWidth <= 900;
             const payload = {
                 campaign: 'agenda_setembro',
-                professional: 'cello_tattoo',
+                professional: 'celo_tattoo',
                 trigger: triggerSource || 'unknown',
                 device: isMobile ? 'mobile' : 'desktop',
                 timestamp: new Date().toISOString()
@@ -563,10 +563,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Helper exposed to QA / dev console
-        window.clearCelloPopupCap = function() {
+        window.clearCeloPopupCap = function() {
             try {
                 localStorage.removeItem(STORAGE_KEY);
-                console.log('%c[Cello Tattoo] Frequency cap cleared!', 'color: #D4AF37; font-weight: bold;');
+                console.log('%c[Celo Tattoo] Frequency cap cleared!', 'color: #D4AF37; font-weight: bold;');
             } catch (e) {}
         };
 
@@ -576,19 +576,19 @@ document.addEventListener('DOMContentLoaded', () => {
             isPopupOpen = true;
             lastFocusedElement = document.activeElement;
 
-            celloBookingPopup.style.display = 'flex';
+            celoBookingPopup.style.display = 'flex';
             // Force reflow for smooth CSS transitions
-            void celloBookingPopup.offsetWidth;
+            void celoBookingPopup.offsetWidth;
 
-            celloBookingPopup.classList.add('active');
-            celloBookingPopup.setAttribute('aria-hidden', 'false');
+            celoBookingPopup.classList.add('active');
+            celoBookingPopup.setAttribute('aria-hidden', 'false');
             document.body.classList.add('booking-popup-locked');
 
             trackBookingPopupEvent('booking_popup_view', triggerSource);
 
             // Focus management: focus close button or first action
-            if (celloBookingClose) {
-                setTimeout(() => celloBookingClose.focus(), 80);
+            if (celoBookingClose) {
+                setTimeout(() => celoBookingClose.focus(), 80);
             }
         }
 
@@ -597,21 +597,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isPopupOpen) return;
             isPopupOpen = false;
 
-            celloBookingPopup.classList.remove('active');
-            celloBookingPopup.setAttribute('aria-hidden', 'true');
+            celoBookingPopup.classList.remove('active');
+            celoBookingPopup.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('booking-popup-locked');
 
             setFrequencyCapTimestamp();
             trackBookingPopupEvent('booking_popup_close', source);
 
             // Show floating reopen badge
-            if (celloBookingTrigger) {
-                celloBookingTrigger.style.display = 'inline-flex';
+            if (celoBookingTrigger) {
+                celoBookingTrigger.style.display = 'inline-flex';
             }
 
             setTimeout(() => {
                 if (!isPopupOpen) {
-                    celloBookingPopup.style.display = 'none';
+                    celoBookingPopup.style.display = 'none';
                 }
             }, 300);
 
@@ -626,8 +626,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hasAutoTriggered || isPopupOpen) return;
             if (isFrequencyCapped()) {
                 // If frequency capped, show the discreet floating reopen button
-                if (celloBookingTrigger) {
-                    celloBookingTrigger.style.display = 'inline-flex';
+                if (celoBookingTrigger) {
+                    celoBookingTrigger.style.display = 'inline-flex';
                 }
                 return;
             }
@@ -675,16 +675,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('mouseleave', handleExitIntent);
 
         // Close Event Listeners
-        if (celloBookingClose) {
-            celloBookingClose.addEventListener('click', (e) => {
+        if (celoBookingClose) {
+            celoBookingClose.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 closeBookingPopup('close_button');
             });
         }
 
-        if (celloBookingBackdrop) {
-            celloBookingBackdrop.addEventListener('click', (e) => {
+        if (celoBookingBackdrop) {
+            celoBookingBackdrop.addEventListener('click', (e) => {
                 e.preventDefault();
                 closeBookingPopup('backdrop');
             });
@@ -702,14 +702,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (e.key === 'Tab') {
                 const focusableSelectors = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-                const focusableElements = Array.from(celloBookingModal.querySelectorAll(focusableSelectors));
+                const focusableElements = Array.from(celoBookingModal.querySelectorAll(focusableSelectors));
                 if (focusableElements.length === 0) return;
 
                 const firstElement = focusableElements[0];
                 const lastElement = focusableElements[focusableElements.length - 1];
 
                 if (e.shiftKey) {
-                    if (document.activeElement === firstElement || document.activeElement === celloBookingPopup) {
+                    if (document.activeElement === firstElement || document.activeElement === celoBookingPopup) {
                         e.preventDefault();
                         lastElement.focus();
                     }
@@ -723,13 +723,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Floating Reopen Trigger
-        if (celloBookingTrigger) {
+        if (celoBookingTrigger) {
             // Check if already capped on load, reveal floating trigger
             if (isFrequencyCapped()) {
-                celloBookingTrigger.style.display = 'inline-flex';
+                celoBookingTrigger.style.display = 'inline-flex';
             }
 
-            celloBookingTrigger.addEventListener('click', (e) => {
+            celoBookingTrigger.addEventListener('click', (e) => {
                 e.preventDefault();
                 trackBookingPopupEvent('booking_popup_reopen', 'manual');
                 openBookingPopup('manual');
@@ -737,15 +737,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // WhatsApp CTA Click Tracking
-        if (celloBookingWaCta) {
-            celloBookingWaCta.addEventListener('click', () => {
+        if (celoBookingWaCta) {
+            celoBookingWaCta.addEventListener('click', () => {
                 trackBookingPopupEvent('booking_whatsapp_click', 'cta_button');
             });
         }
 
         // Secondary Gallery CTA
-        if (celloBookingGalleryCta) {
-            celloBookingGalleryCta.addEventListener('click', (e) => {
+        if (celoBookingGalleryCta) {
+            celoBookingGalleryCta.addEventListener('click', (e) => {
                 e.preventDefault();
                 closeBookingPopup('gallery_nav');
                 const gallerySection = document.getElementById('gallery');
