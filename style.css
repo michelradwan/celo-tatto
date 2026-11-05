@@ -3807,3 +3807,359 @@ body.booking-popup-locked {
         font-size: 0.88rem;
     }
 }
+
+
+/* ==========================================================================
+   UPGRADE PREMIUM: WHATSAPP FLUTUANTE QUICK ACTION, LIGHTBOX & TESTIMONIALS
+   ========================================================================== */
+
+/* 1. Botão Flutuante de WhatsApp Direto */
+.whatsapp-fixed-btn {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 1390;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45), 0 0 15px rgba(0, 0, 0, 0.7);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.whatsapp-fixed-btn i {
+    font-size: 1.25rem;
+    color: #FFFFFF;
+}
+
+.whatsapp-fixed-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 14px 35px rgba(37, 211, 102, 0.6), 0 0 25px rgba(37, 211, 102, 0.3);
+    color: #FFFFFF;
+}
+
+.whatsapp-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 8px #FFFFFF;
+    animation: livePulse 2s infinite;
+}
+
+/* 2. Lightbox Modal de Alta Definição */
+.gallery-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(4, 4, 3, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.lightbox-content-box {
+    position: relative;
+    max-width: min(92vw, 860px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(201, 154, 74, 0.4);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 35px rgba(201, 154, 74, 0.2);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-lightbox-overlay.active .lightbox-img {
+    transform: scale(1);
+}
+
+.lightbox-caption {
+    margin-top: 1rem;
+    text-align: center;
+    color: #F1EEE8;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.lightbox-tag {
+    font-size: 0.72rem;
+    color: var(--gold-primary);
+    background: rgba(201, 154, 74, 0.14);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 800;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(201, 154, 74, 0.4);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+    background: var(--gold-primary);
+    color: #080706;
+    transform: rotate(90deg);
+}
+
+/* Indicador de clique na galeria */
+.gallery-item {
+    cursor: zoom-in;
+}
+
+.gallery-overlay::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(17, 16, 14, 0.75);
+    border: 1px solid rgba(201, 154, 74, 0.4);
+    color: #F5E096;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.25s ease;
+}
+
+.gallery-item:hover .gallery-overlay::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 3. Seção de Depoimentos & Avaliações Google 5 Estrelas */
+.reviews-section {
+    padding: 6.5rem 0;
+    background: linear-gradient(180deg, #080706 0%, #11100E 100%);
+    border-top: 1px solid rgba(201, 154, 74, 0.15);
+    border-bottom: 1px solid rgba(201, 154, 74, 0.15);
+}
+
+.reviews-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201, 154, 74, 0.1);
+    border: 1px solid rgba(201, 154, 74, 0.35);
+    padding: 0.4rem 0.9rem;
+    border-radius: 9999px;
+    color: #F5E096;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+}
+
+.google-stars {
+    color: #FFB800;
+    display: inline-flex;
+    gap: 0.2rem;
+    font-size: 0.88rem;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(201, 154, 74, 0.22);
+    border-radius: 16px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+}
+
+.review-card:hover {
+    background: rgba(201, 154, 74, 0.06);
+    border-color: rgba(201, 154, 74, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(201, 154, 74, 0.12);
+}
+
+.review-text {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: #D6D2CA;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-top: 1px solid rgba(201, 154, 74, 0.15);
+    padding-top: 0.9rem;
+}
+
+.author-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    color: #080706;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.author-name {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #F1EEE8;
+}
+
+.author-meta {
+    font-size: 0.72rem;
+    color: #8D6B38;
+    font-weight: 600;
+}
+
+/* 4. Guia Rápido de Cuidados com a Tatuagem */
+.aftercare-section {
+    padding: 6.5rem 0;
+    background: #0B0B0B;
+}
+
+.aftercare-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-top: 3rem;
+}
+
+.aftercare-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(201, 154, 74, 0.2);
+    border-radius: 14px;
+    padding: 1.6rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aftercare-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-3px);
+    background: rgba(201, 154, 74, 0.05);
+}
+
+.aftercare-num {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold-primary);
+    line-height: 1;
+}
+
+.aftercare-title {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #F1EEE8;
+}
+
+.aftercare-desc {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: #A8A39A;
+    line-height: 1.65;
+}
+
+@media (max-width: 992px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    .aftercare-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .whatsapp-fixed-btn {
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        left: 16px;
+        padding: 0.65rem 1rem;
+        font-size: 0.74rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .aftercare-grid {
+        grid-template-columns: 1fr;
+    }
+}

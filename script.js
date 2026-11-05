@@ -816,4 +816,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // GALLERY LIGHTBOX (ZOOM & ALTA DEFINIÇÃO)
+    const galleryLightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTag = document.getElementById('lightboxTag');
+    const lightboxCaptionText = document.getElementById('lightboxCaptionText');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    if (galleryLightbox && lightboxImg && galleryItems.length > 0) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const cat = item.querySelector('.gallery-cat');
+                const caption = item.querySelector('.gallery-caption');
+
+                if (img) {
+                    lightboxImg.setAttribute('src', img.getAttribute('src'));
+                    lightboxImg.setAttribute('alt', img.getAttribute('alt') || 'Tatuagem Celo Tattoo');
+                    if (lightboxTag && cat) lightboxTag.textContent = cat.textContent;
+                    if (lightboxCaptionText && caption) lightboxCaptionText.textContent = caption.textContent;
+
+                    galleryLightbox.classList.add('active');
+                    document.body.classList.add('booking-popup-locked');
+                }
+            });
+        });
+
+        function closeLightbox() {
+            galleryLightbox.classList.remove('active');
+            // If main popup is not open, unlock body
+            const celoBookingPopup = document.getElementById('celoBookingPopup');
+            if (!celoBookingPopup || !celoBookingPopup.classList.contains('active')) {
+                document.body.classList.remove('booking-popup-locked');
+            }
+        }
+
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', closeLightbox);
+        }
+
+        galleryLightbox.addEventListener('click', (e) => {
+            if (e.target === galleryLightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (galleryLightbox.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) {
+                closeLightbox();
+            }
+        });
+    }
+
 });
