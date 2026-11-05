@@ -213,26 +213,26 @@
                             </div>
                         </div>
                         <div class="studio-thumbs-strip" id="studioThumbs">
-                            <button type="button" class="studio-thumb active" data-img="images/new_studio_1.jpeg" aria-label="Ver foto 1 do estúdio">
+                            <button type="button" class="studio-thumb active" data-img="images/new_studio_1.jpeg" aria-label="Ver foto 1 do estúdio - Sala de Atendimento">
                                 <img src="images/new_studio_1.jpeg" alt="Sala de Atendimento Celo Tattoo">
                             </button>
-                            <button type="button" class="studio-thumb" data-img="images/new_studio_2.jpeg" aria-label="Ver foto 2 do estúdio">
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_2.jpeg" aria-label="Ver foto 2 do estúdio - Iluminação e Equipamentos">
                                 <img src="images/new_studio_2.jpeg" alt="Iluminação e Conforto Celo Tattoo">
                             </button>
-                            <button type="button" class="studio-thumb" data-img="images/new_studio_3.jpeg" aria-label="Ver foto 3 do estúdio">
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_3.jpeg" aria-label="Ver foto 3 do estúdio - Bancada e Materiais">
                                 <img src="images/new_studio_3.jpeg" alt="Materiais Esterilizados e Tecnologia">
                             </button>
-                            <button type="button" class="studio-thumb" data-img="images/new_studio_5.jpeg" aria-label="Ver foto 4 do estúdio">
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_5.jpeg" aria-label="Ver foto 4 do estúdio - Conforto e Premiações">
                                 <img src="images/new_studio_5.jpeg" alt="Ambiente e Certificados">
-                            </button>
-                            <button type="button" class="studio-thumb" data-img="images/new_studio_4.jpeg" aria-label="Ver foto do Celo no estúdio">
-                                <img src="images/new_studio_4.jpeg" alt="Marcelo Celo Tattoo no Estúdio">
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="studio-content-col">
+                    <div class="studio-header-tag">
+                        <i class="fas fa-award"></i> PADRÃO DE EXCELÊNCIA
+                    </div>
                     <h2 class="studio-title">Nosso Estúdio</h2>
                     
                     <div class="studio-text">
@@ -250,6 +250,65 @@
                     </div>
                 </div>
             </div>
+
+            <!-- STUDIO GAMING & ENTERTAINMENT EXPERIENCE (VÍDEO + EXPERIÊNCIA COMPLETA) -->
+            <div class="studio-experience-banner">
+                <div class="studio-exp-grid">
+                    
+                    <!-- Video Column -->
+                    <div class="studio-exp-video-wrap">
+                        <div class="studio-video-container">
+                            <video id="studioExpVideo" class="studio-exp-video" playsinline preload="metadata">
+                                <source src="images/studio_experience.mp4" type="video/mp4">
+                                Seu navegador não suporta reprodução de vídeos.
+                            </video>
+                            <div class="video-custom-controls">
+                                <button type="button" id="studioExpPlayBtn" class="studio-play-btn" aria-label="Reproduzir vídeo do estúdio">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <span class="video-badge-pill"><i class="fas fa-circle live-pulse-dot"></i> BASTIDORES DO ESTÚDIO</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text & Perks Column -->
+                    <div class="studio-exp-content">
+                        <span class="studio-exp-badge">
+                            <i class="fas fa-gamepad"></i> LOUNGE &amp; ENTERTAINMENT
+                        </span>
+                        <h3 class="studio-exp-title">Muito além da tatuagem, uma experiência completa!</h3>
+                        <p class="studio-exp-desc">
+                            Nosso estúdio também conta com um espaço de entretenimento para tornar sua visita ainda mais agradável. Enquanto aproveita o ambiente, você pode se divertir com <strong>Nintendo Wii</strong>, <strong>PlayStation 3 desbloqueado com mais de 5 mil jogos</strong> e <strong>Xbox Series S</strong>. Aqui, conforto, arte e diversão se encontram!
+                        </p>
+
+                        <div class="gaming-consoles-grid">
+                            <div class="console-item">
+                                <div class="console-icon"><i class="fas fa-tv"></i></div>
+                                <div class="console-info">
+                                    <span class="console-name">Nintendo Wii</span>
+                                    <span class="console-tag">Interatividade &amp; Diversão</span>
+                                </div>
+                            </div>
+                            <div class="console-item">
+                                <div class="console-icon"><i class="fab fa-playstation"></i></div>
+                                <div class="console-info">
+                                    <span class="console-name">PlayStation 3 Desbloqueado</span>
+                                    <span class="console-tag">+5.000 Jogos Disponíveis</span>
+                                </div>
+                            </div>
+                            <div class="console-item">
+                                <div class="console-icon"><i class="fab fa-xbox"></i></div>
+                                <div class="console-info">
+                                    <span class="console-name">Xbox Series S</span>
+                                    <span class="console-tag">Nova Geração &amp; Performance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -836,18 +895,34 @@
                     </div>
 
                     
-                    <!-- Novos Tatuadores em Amontada -->
+                    <!-- Tatuadores em Amontada -->
                     <div class="popup-guest-artists">
                         <div class="guest-artists-title">
-                            <i class="fas fa-user-plus"></i>
-                            <span>TATUADORES EM AMONTADA (14/11 A 20/11)</span>
+                            <i class="fas fa-users"></i>
+                            <span>EQUIPE &amp; TATUADORES EM AMONTADA (14/11 A 20/11)</span>
                         </div>
                         <div class="guest-artists-grid">
                             
-                            <!-- Artista 1: RN -->
+                            <!-- 1. Celo (Proprietário) -->
+                            <div class="guest-artist-card host-artist-card">
+                                <div class="guest-avatar-wrap host-avatar-wrap">
+                                    <img src="images/avatar_celo.jpeg" alt="Celo Tattoo — Especialista Fine Line" class="guest-avatar-img">
+                                    <span class="guest-status-dot"></span>
+                                </div>
+                                <div class="guest-artist-info">
+                                    <div class="guest-artist-name">Celo Tattoo <span class="host-pill">Proprietário</span></div>
+                                    <div class="guest-artist-tag">Especialista Fine Line</div>
+                                    <a href="https://instagram.com/celotattoo.ink" target="_blank" rel="noopener noreferrer" class="guest-insta-chip host-chip" aria-label="Instagram @celotattoo.ink">
+                                        <i class="fab fa-instagram"></i>
+                                        <span>@celotattoo.ink</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- 2. RN (Tatuador Convidado) -->
                             <div class="guest-artist-card">
                                 <div class="guest-avatar-wrap">
-                                    <img src="images/avatar_rn.jpeg" alt="Tatuador RN em Amontada" class="guest-avatar-img">
+                                    <img src="images/avatar_rn.jpeg" alt="Tatuador Convidado RN" class="guest-avatar-img">
                                     <span class="guest-status-dot"></span>
                                 </div>
                                 <div class="guest-artist-info">
@@ -860,15 +935,15 @@
                                 </div>
                             </div>
 
-                            <!-- Artista 2: João Victor -->
+                            <!-- 3. João Victor (Tatuador Convidado) -->
                             <div class="guest-artist-card">
                                 <div class="guest-avatar-wrap">
-                                    <img src="images/avatar_jota.jpeg" alt="Tatuador João Victor em Amontada" class="guest-avatar-img">
+                                    <img src="images/avatar_jota.jpeg" alt="Tatuador Convidado João Victor" class="guest-avatar-img">
                                     <span class="guest-status-dot"></span>
                                 </div>
                                 <div class="guest-artist-info">
                                     <div class="guest-artist-name">João Victor</div>
-                                    <div class="guest-artist-tag">Arte Autoral &amp; P&amp;B</div>
+                                    <div class="guest-artist-tag">Tatuador Convidado</div>
                                     <a href="https://instagram.com/jota.tattoart" target="_blank" rel="noopener noreferrer" class="guest-insta-chip" aria-label="Instagram @jota.tattoart">
                                         <i class="fab fa-instagram"></i>
                                         <span>@jota.tattoart</span>

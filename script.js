@@ -782,4 +782,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // Studio Video Controller
+    const studioExpVideo = document.getElementById('studioExpVideo');
+    const studioExpPlayBtn = document.getElementById('studioExpPlayBtn');
+    const studioVideoContainer = document.querySelector('.studio-video-container');
+
+    if (studioExpVideo && studioExpPlayBtn && studioVideoContainer) {
+        function toggleStudioVideo() {
+            if (studioExpVideo.paused) {
+                studioExpVideo.play();
+                studioVideoContainer.classList.add('playing');
+                studioExpPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                studioExpVideo.pause();
+                studioVideoContainer.classList.remove('playing');
+                studioExpPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        studioExpPlayBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleStudioVideo();
+        });
+
+        studioExpVideo.addEventListener('click', () => {
+            toggleStudioVideo();
+        });
+
+        studioExpVideo.addEventListener('ended', () => {
+            studioVideoContainer.classList.remove('playing');
+            studioExpPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+    }
+
 });

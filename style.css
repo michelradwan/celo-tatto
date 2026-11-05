@@ -3210,8 +3210,6 @@ body.booking-popup-locked {
     }
 }
 
-
-
 /* ==========================================================================
    NOVO POP-UP: TATUADORES CONVIDADOS EM AMONTADA & INSTA CHIPS
    ========================================================================== */
@@ -3241,18 +3239,18 @@ body.booking-popup-locked {
 
 .guest-artists-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
 }
 
 .guest-artist-card {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(201, 154, 74, 0.22);
     border-radius: 12px;
-    padding: 0.7rem;
+    padding: 0.65rem 0.6rem;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(8px);
 }
@@ -3264,15 +3262,39 @@ body.booking-popup-locked {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), 0 0 15px rgba(201, 154, 74, 0.15);
 }
 
+.guest-artist-card.host-artist-card {
+    background: linear-gradient(135deg, rgba(201, 154, 74, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border-color: rgba(201, 154, 74, 0.45);
+}
+
+.host-pill {
+    display: inline-block;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #080706;
+    background: var(--gold-primary);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    margin-left: 0.25rem;
+    vertical-align: middle;
+}
+
 .guest-avatar-wrap {
     position: relative;
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
     border-radius: 50%;
     padding: 2px;
     background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     box-shadow: 0 4px 12px rgba(220, 39, 67, 0.35);
+}
+
+.guest-avatar-wrap.host-avatar-wrap {
+    background: linear-gradient(135deg, #F5E096, #C99A4A, #8D6B38);
+    box-shadow: 0 4px 12px rgba(201, 154, 74, 0.4);
 }
 
 .guest-avatar-img {
@@ -3280,20 +3302,21 @@ body.booking-popup-locked {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
     display: block;
     border: 2px solid #11100E;
 }
 
 .guest-status-dot {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 11px;
-    height: 11px;
+    bottom: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
     background: #25D366;
     border: 2px solid #11100E;
     border-radius: 50%;
-    box-shadow: 0 0 8px #25D366;
+    box-shadow: 0 0 6px #25D366;
 }
 
 .guest-artist-info {
@@ -3306,7 +3329,7 @@ body.booking-popup-locked {
 
 .guest-artist-name {
     font-family: var(--font-body);
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: #F1EEE8;
     white-space: nowrap;
@@ -3318,7 +3341,8 @@ body.booking-popup-locked {
 .guest-artist-tag {
     font-family: var(--font-body);
     font-size: 0.68rem;
-    color: #A8A39A;
+    color: #C99A4A;
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3327,16 +3351,16 @@ body.booking-popup-locked {
 .guest-insta-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    margin-top: 0.3rem;
-    padding: 0.28rem 0.55rem;
+    gap: 0.3rem;
+    margin-top: 0.25rem;
+    padding: 0.22rem 0.5rem;
     border-radius: 9999px;
     background: linear-gradient(45deg, rgba(220, 39, 67, 0.18), rgba(188, 24, 136, 0.18));
     border: 1px solid rgba(220, 39, 67, 0.4);
     color: #F1EEE8;
     text-decoration: none;
     font-family: var(--font-body);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.02em;
     width: fit-content;
@@ -3344,11 +3368,22 @@ body.booking-popup-locked {
     transition: all 0.22s ease;
 }
 
+.guest-insta-chip.host-chip {
+    background: rgba(201, 154, 74, 0.15);
+    border-color: rgba(201, 154, 74, 0.5);
+}
+
 .guest-insta-chip i {
     background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
+}
+
+.guest-insta-chip.host-chip i {
+    background: linear-gradient(135deg, #F5E096, #C99A4A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .guest-insta-chip span {
@@ -3365,13 +3400,33 @@ body.booking-popup-locked {
     box-shadow: 0 4px 14px rgba(220, 39, 67, 0.4);
 }
 
-.guest-insta-chip:hover i {
-    -webkit-text-fill-color: #FFFFFF;
+.guest-insta-chip.host-chip:hover {
+    background: var(--gold-gradient);
+    border-color: transparent;
+    color: #080706;
+}
+
+.guest-insta-chip:hover i,
+.guest-insta-chip.host-chip:hover i {
+    -webkit-text-fill-color: currentColor;
 }
 
 /* ==========================================================================
    NOVA SEÇÃO DE ESTÚDIO: CARROSSEL INTERATIVO & MINIATURAS
    ========================================================================== */
+.studio-header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--gold-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
 .studio-showcase {
     display: flex;
     flex-direction: column;
@@ -3420,13 +3475,13 @@ body.booking-popup-locked {
 
 .studio-thumbs-strip {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.65rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
 }
 
 .studio-thumb {
     position: relative;
-    height: 72px;
+    height: 76px;
     border-radius: 8px;
     overflow: hidden;
     padding: 0;
@@ -3461,14 +3516,294 @@ body.booking-popup-locked {
     box-shadow: 0 0 12px rgba(201, 154, 74, 0.5);
 }
 
-@media (max-width: 600px) {
+/* ==========================================================================
+   STUDIO GAMING & ENTERTAINMENT EXPERIENCE (VÍDEO + LOUNGE)
+   ========================================================================== */
+.studio-experience-banner {
+    margin-top: 4.5rem;
+    padding: 3rem;
+    background: radial-gradient(circle at 10% 20%, rgba(201, 154, 74, 0.08) 0%, rgba(17, 16, 14, 0.98) 70%);
+    border: 1px solid rgba(201, 154, 74, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(245, 224, 150, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.studio-experience-banner::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(201, 154, 74, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.studio-exp-grid {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.studio-exp-video-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.studio-video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 520px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid rgba(201, 154, 74, 0.35);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(201, 154, 74, 0.18);
+}
+
+.studio-exp-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-custom-controls {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.25);
+    transition: background 0.3s ease;
+}
+
+.studio-video-container.playing .video-custom-controls {
+    background: transparent;
+}
+
+.studio-play-btn {
+    pointer-events: auto;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    border: 2px solid #FFFFFF;
+    color: #080706;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(201, 154, 74, 0.6);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-play-btn i {
+    margin-left: 4px;
+}
+
+.studio-play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(201, 154, 74, 0.8);
+}
+
+.studio-video-container.playing .studio-play-btn {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.studio-video-container:hover.playing .studio-play-btn {
+    opacity: 0.85;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.video-badge-pill {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(17, 16, 14, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201, 154, 74, 0.35);
+    color: #F5E096;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.live-pulse-dot {
+    color: #25D366;
+    font-size: 0.55rem;
+    animation: livePulse 2s infinite;
+}
+
+.studio-exp-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.studio-exp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 9999px;
+    background: rgba(201, 154, 74, 0.12);
+    border: 1px solid rgba(201, 154, 74, 0.35);
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #F5E096;
+    margin-bottom: 1.25rem;
+}
+
+.studio-exp-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #F1EEE8;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.02em;
+}
+
+.studio-exp-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: #C0BAB0;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.studio-exp-desc strong {
+    color: #F5E096;
+    font-weight: 700;
+}
+
+.gaming-consoles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    width: 100%;
+}
+
+.console-item {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    padding: 0.95rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(201, 154, 74, 0.2);
+    border-radius: 12px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.console-item:hover {
+    background: rgba(201, 154, 74, 0.08);
+    border-color: var(--gold-primary);
+    transform: translateX(6px);
+}
+
+.console-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 10px;
+    background: rgba(201, 154, 74, 0.15);
+    border: 1px solid rgba(201, 154, 74, 0.3);
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.console-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.console-name {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #F1EEE8;
+}
+
+.console-tag {
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    color: #A8A39A;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .studio-exp-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .studio-video-container {
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 900px) {
     .guest-artists-grid {
         grid-template-columns: 1fr;
+        gap: 0.65rem;
+    }
+    .studio-experience-banner {
+        padding: 2rem 1.5rem;
+        margin-top: 3.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .studio-thumbs-strip {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
     }
     .studio-main-frame {
-        height: 300px;
+        height: 280px;
     }
     .studio-thumb {
         height: 56px;
+    }
+    .studio-video-container {
+        max-width: 100%;
+        max-height: 460px;
+    }
+    .console-item {
+        padding: 0.8rem 1rem;
+        gap: 0.85rem;
+    }
+    .console-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        font-size: 1.1rem;
+    }
+    .console-name {
+        font-size: 0.88rem;
     }
 }
