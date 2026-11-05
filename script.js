@@ -758,4 +758,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    // Studio Interactive Showcase & Thumbnail Switcher
+    const studioMainImg = document.getElementById('studioMainImg');
+    const studioThumbs = document.querySelectorAll('.studio-thumb');
+
+    if (studioMainImg && studioThumbs.length > 0) {
+        studioThumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const newSrc = thumb.getAttribute('data-img');
+                if (!newSrc || studioMainImg.getAttribute('src') === newSrc) return;
+
+                studioThumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+
+                // Smooth fade transition
+                studioMainImg.style.opacity = '0';
+                setTimeout(() => {
+                    studioMainImg.setAttribute('src', newSrc);
+                    studioMainImg.style.opacity = '1';
+                }, 200);
+            });
+        });
+    }
+
 });

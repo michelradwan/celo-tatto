@@ -204,9 +204,31 @@
         <div class="container">
             <div class="studio-layout">
                 <div class="studio-image-col">
-                    <div class="image-frame">
-                        <img src="images/foto_nosso_studio.png" alt="Nosso Estúdio — Celo Tattoo" loading="lazy">
-                        <div class="image-gold-border"></div>
+                    <div class="studio-showcase">
+                        <div class="studio-main-frame">
+                            <img id="studioMainImg" src="images/new_studio_1.jpeg" alt="Espaço Exclusivo Celo Tattoo" loading="lazy">
+                            <div class="image-gold-border"></div>
+                            <div class="studio-badge-exclusive">
+                                <i class="fas fa-gem"></i> ESPAÇO EXCLUSIVO
+                            </div>
+                        </div>
+                        <div class="studio-thumbs-strip" id="studioThumbs">
+                            <button type="button" class="studio-thumb active" data-img="images/new_studio_1.jpeg" aria-label="Ver foto 1 do estúdio">
+                                <img src="images/new_studio_1.jpeg" alt="Sala de Atendimento Celo Tattoo">
+                            </button>
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_2.jpeg" aria-label="Ver foto 2 do estúdio">
+                                <img src="images/new_studio_2.jpeg" alt="Iluminação e Conforto Celo Tattoo">
+                            </button>
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_3.jpeg" aria-label="Ver foto 3 do estúdio">
+                                <img src="images/new_studio_3.jpeg" alt="Materiais Esterilizados e Tecnologia">
+                            </button>
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_5.jpeg" aria-label="Ver foto 4 do estúdio">
+                                <img src="images/new_studio_5.jpeg" alt="Ambiente e Certificados">
+                            </button>
+                            <button type="button" class="studio-thumb" data-img="images/new_studio_4.jpeg" aria-label="Ver foto do Celo no estúdio">
+                                <img src="images/new_studio_4.jpeg" alt="Marcelo Celo Tattoo no Estúdio">
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -792,7 +814,7 @@
                         </div>
                         <h2 class="booking-popup-title" id="celoBookingTitle">AGENDA ABERTA</h2>
                         <p class="booking-popup-subhead" id="celoBookingDesc">
-                            <strong>Celo Tattoo</strong> está com agenda aberta para <span>outubro</span> em <strong>Amontada</strong>.
+                            <strong>Celo Tattoo & Equipe</strong> estão com agenda aberta de <span>14/11 até 20/11</span> em <strong>Amontada</strong>.
                         </p>
                     </div>
 
@@ -805,7 +827,7 @@
                                 <i class="fas fa-calendar-alt"></i>
                             </div>
                             <div class="schedule-card-info">
-                                <div class="schedule-date-badge">05/10 — 13/10</div>
+                                <div class="schedule-date-badge">14/11 até 20/11</div>
                                 <div class="schedule-city-name">AMONTADA</div>
                                 <div class="schedule-detail-text">Vagas Limitadas</div>
                             </div>
@@ -813,10 +835,54 @@
 
                     </div>
 
+                    
+                    <!-- Novos Tatuadores em Amontada -->
+                    <div class="popup-guest-artists">
+                        <div class="guest-artists-title">
+                            <i class="fas fa-user-plus"></i>
+                            <span>TATUADORES EM AMONTADA (14/11 A 20/11)</span>
+                        </div>
+                        <div class="guest-artists-grid">
+                            
+                            <!-- Artista 1: RN -->
+                            <div class="guest-artist-card">
+                                <div class="guest-avatar-wrap">
+                                    <img src="images/avatar_rn.jpeg" alt="Tatuador RN em Amontada" class="guest-avatar-img">
+                                    <span class="guest-status-dot"></span>
+                                </div>
+                                <div class="guest-artist-info">
+                                    <div class="guest-artist-name">RN</div>
+                                    <div class="guest-artist-tag">Tatuador Convidado</div>
+                                    <a href="https://instagram.com/rn_art.tattoo" target="_blank" rel="noopener noreferrer" class="guest-insta-chip" aria-label="Instagram @rn_art.tattoo">
+                                        <i class="fab fa-instagram"></i>
+                                        <span>@rn_art.tattoo</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Artista 2: João Victor -->
+                            <div class="guest-artist-card">
+                                <div class="guest-avatar-wrap">
+                                    <img src="images/avatar_jota.jpeg" alt="Tatuador João Victor em Amontada" class="guest-avatar-img">
+                                    <span class="guest-status-dot"></span>
+                                </div>
+                                <div class="guest-artist-info">
+                                    <div class="guest-artist-name">João Victor</div>
+                                    <div class="guest-artist-tag">Arte Autoral &amp; P&amp;B</div>
+                                    <a href="https://instagram.com/jota.tattoart" target="_blank" rel="noopener noreferrer" class="guest-insta-chip" aria-label="Instagram @jota.tattoart">
+                                        <i class="fab fa-instagram"></i>
+                                        <span>@jota.tattoart</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <!-- Deposit Notice (Microcopy) -->
                     <div class="booking-deposit-notice">
                         <i class="fas fa-lock"></i>
-                        <span>Agendamentos somente após o pagamento do sinal.</span>
+                        <span>agendamentos somentes após o pagamemento do sinal</span>
                     </div>
 
                     <!-- Action Buttons -->
