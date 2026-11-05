@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function trackBookingPopupEvent(eventName, triggerSource) {
             const isMobile = window.innerWidth <= 900;
             const payload = {
-                campaign: 'agenda_setembro',
+                campaign: 'agenda_novembro_amontada',
                 professional: 'celo_tattoo',
                 trigger: triggerSource || 'unknown',
                 device: isMobile ? 'mobile' : 'desktop',
@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Timer Trigger: 8 Seconds
         const timerId = setTimeout(() => {
             attemptAutoTrigger('timer');
-        }, 8000);
+        }, 3500);
 
         // 2. Scroll Trigger: 40% Scroll Depth
         function handleScrollTrigger() {
